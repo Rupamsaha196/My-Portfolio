@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rupam Saha | Freelance Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- MODERN REALISTIC CSS --- */
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --primary-color: #8b5cf6; /* Violet */
+            --accent-color: #06b6d4; /* Cyan */
+            --nav-bg: rgba(15, 23, 42, 0.85);
+            --border-color: rgba(148, 163, 184, 0.1);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            --glow: 0 0 20px rgba(139, 92, 246, 0.15);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --primary-color: #6366f1;
+            --accent-color: #0ea5e9;
+            --nav-bg: rgba(248, 250, 252, 0.85);
+            --border-color: rgba(226, 232, 240, 0.8);
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --glow: 0 0 15px rgba(99, 102, 241, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; transition: all 0.3s ease; }
+        
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            line-height: 1.6; 
+            background-image: radial-gradient(circle at 10% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 20%),
+                              radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 20%);
+            background-attachment: fixed;
+        }
+        
+        /* Navbar */
+        .navbar { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 1rem 5%; 
+            background: var(--nav-bg); 
+            position: sticky; top: 0; z-index: 1000; 
+            backdrop-filter: blur(12px); 
+            border-bottom: 1px solid var(--border-color);
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; background: linear-gradient(to right, var(--primary-color), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links { list-style: none; display: flex; gap: 2.5rem; }
+        .nav-links a { text-decoration: none; color: var(--text-color); font-weight: 500; font-size: 0.95rem; position: relative; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background: var(--primary-color); transition: width 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+        .theme-btn { background: none; border: none; color: var(--text-color); cursor: pointer; font-size: 1.2rem; padding: 5px; border-radius: 50%; }
+        .theme-btn:hover { background: var(--border-color); }
+
+        /* Hero */
+        .hero { height: 85vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 0 1rem; position: relative; }
+        .hero h1 { font-size: 4rem; margin-bottom: 1.5rem; letter-spacing: -1px; line-height: 1.1; }
+        .hero h1 span { background: linear-gradient(to right, var(--primary-color), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { font-size: 1.2rem; color: var(--text-color); opacity: 0.8; max-width: 600px; margin: 0 auto 2.5rem auto; }
+        .scroll-down { position: absolute; bottom: 30px; animation: bounce 2s infinite; opacity: 0.7; font-size: 1.5rem; }
+
+        /* Sections */
+        .section { padding: 6rem 10%; }
+        .section-title { font-size: 2.2rem; margin-bottom: 3rem; display: flex; align-items: center; gap: 1rem; }
+        .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border-color); }
+
+        /* Project Menu Grid */
+        .projects-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 2.5rem; 
+        }
+        
+        .project-card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border-color);
+            border-radius: 16px; 
+            overflow: hidden; 
+            backdrop-filter: blur(5px);
+            box-shadow: var(--shadow);
+            position: relative;
+            cursor: default;
+        }
+
+        .project-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: var(--glow);
+            border-color: var(--primary-color);
+        }
+
+        .card-image { 
+            height: 180px; 
+            width: 100%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 700; 
+            font-size: 1.5rem; 
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        /* Realistic overlay for images */
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.4));
+        }
+
+        .card-info { padding: 1.5rem; }
+        .card-info h3 { margin-bottom: 0.5rem; font-size: 1.25rem; }
+        .card-info p { font-size: 0.95rem; opacity: 0.7; margin-bottom: 1.2rem; min-height: 3rem; }
+        
+        .tech-stack { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: auto; }
+        .tech-badge { 
+            font-size: 0.75rem; 
+            padding: 4px 10px; 
+            border-radius: 20px; 
+            background: var(--border-color); 
+            color: var(--primary-color);
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+        .project-card:hover .tech-badge { border-color: var(--primary-color); background: rgba(139, 92, 246, 0.1); }
+
+        /* Contact Modern */
+        .contact-container { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 2rem; background: var(--card-bg); 
+            padding: 3rem; border-radius: 20px; 
+            border: 1px solid var(--border-color);
+        }
+        .contact-item { display: flex; align-items: center; gap: 1.5rem; }
+        .icon-box { 
+            width: 50px; height: 50px; 
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); 
+            border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; 
+        }
+        .contact-text h4 { font-size: 0.9rem; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
+        .contact-text p { font-size: 1.1rem; font-weight: 600; }
+
+        footer { text-align: center; padding: 3rem; opacity: 0.5; font-size: 0.9rem; border-top: 1px solid var(--border-color); margin-top: 4rem; }
+
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+        
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+            .section { padding: 4rem 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">Rupam.dev</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#works">Selected Works</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button id="theme-toggle" class="theme-btn"><i class="fas fa-sun"></i></button>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Backend Logic.<br><span>Frontend Magic.</span></h1>
+            <p>I build high-performance Spring Boot applications with modern AI integrations and clean interfaces.</p>
+        </div>
+        <i class="fas fa-chevron-down scroll-down"></i>
+    </section>
+
+    <section id="works" class="section">
+        <h2 class="section-title">Selected Works</h2>
+        <div class="projects-grid">
+            
+            <div class="project-card">
+                <div class="card-image" style="background: linear-gradient(135deg, #FF6B6B, #556270);">
+                    <i class="fas fa-sync-alt fa-2x"></i>&nbsp; Spin Webapp
+                </div>
+                <div class="card-info">
+                    <h3>Spin Webapp</h3>
+                    <p>A gamified web application featuring dynamic spinning mechanics and real-time state management.</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">CSS Animations</span>
+                        <span class="tech-badge">UX Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                    <i class="fas fa-robot fa-2x"></i>&nbsp; Smart Email Gen
+                </div>
+                <div class="card-info">
+                    <h3>Smart Email Generator</h3>
+                    <p>Automated business communication tool leveraging Spring Boot and Gemini API for context-aware AI drafting.</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Spring Boot</span>
+                        <span class="tech-badge">Gemini API</span>
+                        <span class="tech-badge">Java 17</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <i class="fas fa-shopping-cart fa-2x"></i>&nbsp; E-Shop API
+                </div>
+                <div class="card-info">
+                    <h3>E-Commerce Backend</h3>
+                    <p>A robust REST API for online retail handling user auth, cart management, and payment gateway integration.</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">Spring Security</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">Hibernate</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-image" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                    <i class="fas fa-tasks fa-2x"></i>&nbsp; TaskFlow
+                </div>
+                <div class="card-info">
+                    <h3>Task Management System</h3>
+                    <p>Productivity tool for freelancers to track time and invoice clients automatically.</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">React</span>
+                        <span class="tech-badge">Node.js</span>
+                        <span class="tech-badge">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-image" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                    <i class="fas fa-chart-line fa-2x"></i>&nbsp; CryptoDash
+                </div>
+                <div class="card-info">
+                    <h3>Crypto Dashboard</h3>
+                    <p>Real-time cryptocurrency tracking dashboard using WebSocket connections for live price updates.</p>
+                    <div class="tech-stack">
+                        <span class="tech-badge">WebSockets</span>
+                        <span class="tech-badge">Chart.js</span>
+                        <span class="tech-badge">API Integration</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="section-title">About</h2>
+        <p style="font-size: 1.1rem; opacity: 0.8; line-height: 1.8;">
+            I am Rupam Saha, a freelance developer who bridges the gap between complex back-end logic and engaging front-end experiences. 
+            With a strong foundation in Java ecosystem and a knack for modern web technologies, I help businesses automate workflows and build digital products that scale.
+        </p>
+    </section>
+
+    <section id="contact" class="section">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <div class="contact-item">
+                <div class="icon-box"><i class="fas fa-phone-alt"></i></div>
+                <div class="contact-text">
+                    <h4>Call Me</h4>
+                    <p>+91 6291958861</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="icon-box"><i class="fas fa-envelope"></i></div>
+                <div class="contact-text">
+                    <h4>Email Me</h4>
+                    <p>rupamsaha58861@gmail.com</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="icon-box"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="contact-text">
+                    <h4>Location</h4>
+                    <p>India (Remote Available)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Rupam Saha. Designed & Developed with Spring Boot.</p>
+    </footer>
+
+    <script>
+        // THEME TOGGLE LOGIC
+        const themeToggle = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+        const icon = themeToggle.querySelector('i');
+
+        // Check Local Storage
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        htmlElement.setAttribute('data-theme', savedTheme);
+        updateIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = htmlElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        function updateIcon(theme) {
+            icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
